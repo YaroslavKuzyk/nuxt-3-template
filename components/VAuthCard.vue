@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import AppButton from "~/components/Styleguide/AppButton/AppButton.vue";
+import AppButton from "@/components/Styleguide/AppButton/AppButton.vue";
 const props = defineProps({
   buttonText: String,
   linkText: String,
