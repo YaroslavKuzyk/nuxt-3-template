@@ -1,0 +1,11 @@
+.auth-page {
+  width: 100%;
+  height: calc(100vh - 66px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__forgot {
+    text-align: right;
+  }
+}
