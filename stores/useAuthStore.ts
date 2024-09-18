@@ -88,7 +88,7 @@ export const useAuthStore = defineStore({
           body: data,
         });
 
-        await $fetch("/api/set-token");
+        // await $fetch("/api/set-token");
         await this.getUser();
 
         if (this.isAuth) {
