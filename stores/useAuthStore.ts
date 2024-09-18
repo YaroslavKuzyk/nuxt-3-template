@@ -10,6 +10,8 @@ import { navigateTo } from "#app";
 import { useValidationStore } from "~/stores/useValidationStore";
 import { useToasts } from "~/composables/useToasts";
 
+import { setCookie } from "h3";
+
 export const useAuthStore = defineStore({
   id: "auth-store",
   state: () => ({
@@ -83,20 +85,19 @@ export const useAuthStore = defineStore({
     async signIn(data: ISignInUser) {
       try {
         const { $customFetch } = useNuxtApp();
-        await $customFetch("/api/sign-in", {
+        const response = await $customFetch("/api/sign-in", {
           method: "POST",
           body: data,
         });
 
-        // await $fetch("/api/set-token");
-        await this.getUser();
+        const token = useCookie("token");
+        token.value = response.token;
+
+        setTimeout(async () => {
+          await this.getUser(true);
+        }, 100);
 
         if (this.isAuth) {
-          navigateTo("/dashboard");
-          setTimeout(() => {
-            const toasts = useToasts();
-            toasts.success("WELCOME");
-          }, 500);
         }
       } catch (error) {
         const validationStore = useValidationStore();
@@ -104,23 +105,27 @@ export const useAuthStore = defineStore({
       }
     },
 
-    async getUser() {
+    async getUser(redirect = false) {
       try {
         const { $customFetch } = useNuxtApp();
-        const token = useCookie("token");
-        if (!token.value) {
-          this.isAuth = false;
-          this.user_info = null;
-          return;
-        }
         const data = await $customFetch("/api/user", {
           method: "GET",
           credentials: "include",
         });
         this.user_info = data;
         this.isAuth = true;
+        if (redirect) {
+          navigateTo("/dashboard");
+
+          setTimeout(async () => {
+            const toasts = useToasts();
+            toasts.success("WELCOME");
+          }, 500);
+        }
+        return true;
       } catch (error) {
         this.isAuth = false;
+        return false;
       }
     },
   },

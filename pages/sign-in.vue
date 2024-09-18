@@ -51,8 +51,8 @@ const authStore = useAuthStore();
 const validationStore = useValidationStore();
 
 const data = ref({
-  email: "",
-  password: "",
+  email: "kuzyk.yarik@gmail.com",
+  password: "Gevf332211~",
 });
 const loading = ref(false);
 
@@ -60,7 +60,7 @@ const confirm = async () => {
   loading.value = true;
 
   const { status } = await useAsyncData("sign-up", () =>
-    authStore.signIn(data.value),
+    authStore.signIn(data.value)
   );
 
   watchEffect(() => {
