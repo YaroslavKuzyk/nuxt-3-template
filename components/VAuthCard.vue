@@ -5,11 +5,6 @@
         <slot name="title" />
       </h1>
       <div class="auth-card__info-text">
-        <div class="auth-card__info-privacy">
-          {{ $t("THIS_SITE_IS_PROTECTED_BY_RECAPTCHA_AND_THE_GOOGLE") }}
-          <a href="/">{{ $t("PRIVACY_POLICY") }}</a> {{ $t("AND") }}
-          <a href="/">{{ $t("TERMS_OF_SERVICE") }}</a> {{ $t("APPLY") }}.
-        </div>
         <div class="auth-card__info-copy">
           © 2017 - 2022 Abyss. {{ $t("ALL_RIGHTS_RESERVED") }}
         </div>
@@ -33,7 +28,7 @@
       </div>
     </div>
 
-    <div class="auth-card-circle"></div>
+    <!-- <div class="auth-card-circle"></div> -->
   </div>
 </template>
 
@@ -61,42 +56,6 @@ const emit = defineEmits(["confirm"]);
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-
-  &:before {
-    position: absolute;
-    content: "";
-    width: 48px;
-    height: 48px;
-    background: var(--text-color);
-    border-radius: 50%;
-    top: 40px;
-    left: 340px;
-    opacity: 0.2;
-  }
-
-  &:after {
-    position: absolute;
-    content: "";
-    width: 290px;
-    height: 290px;
-    border: 20px solid var(--text-color);
-    border-radius: 50%;
-    bottom: -150px;
-    left: 355px;
-    opacity: 0.2;
-  }
-
-  &-circle {
-    position: absolute;
-    content: "";
-    width: 190px;
-    height: 190px;
-    background: var(--text-color);
-    border-radius: 50%;
-    bottom: -70px;
-    left: 425px;
-    opacity: 0.2;
-  }
 
   &__title {
     color: var(--title-color);
