@@ -51,8 +51,8 @@ const authStore = useAuthStore();
 const validationStore = useValidationStore();
 
 const data = ref({
-  email: "kuzyk.yarik@gmail.com",
-  password: "Gevf332211~",
+  email: "",
+  password: "",
 });
 const loading = ref(false);
 
